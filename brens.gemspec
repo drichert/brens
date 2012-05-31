@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "brens"
   gem.require_paths = ["lib"]
   gem.version       = Brens::VERSION
+
+  gem.add_development_dependency("rspec")
 end
