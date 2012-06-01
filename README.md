@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ### Words
 
+When indexed by float, returns word at position scaled by index
+
 ```ruby
 text  = "The quick brown fox jumps over the lazy dog. Hi."
 words = Brens::Words.new(text)
@@ -27,6 +29,14 @@ words = Brens::Words.new(text)
 words[0.0] #=> "The"
 words[0.3] #=> "fox"
 words[1.0] #=> "Hi."
+```
+
+When indexed by integer, returns word at position
+
+```ruby 
+words[0] #=> "The"
+words[7] #=> "lazy"
+words[9] #=> "Hi."
 ```
 
 Convert position value to float index  
