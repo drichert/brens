@@ -24,7 +24,9 @@ Or install it yourself as:
 text  = "The quick brown fox jumps over the lazy dog. Hi."
 words = Brens::Words.new(text)
 
+words[0.0] #=> "The"
 words[0.3] #=> "fox"
+words[1.0] #=> "Hi."
 ```
 
 Convert position value to float index  
