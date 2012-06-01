@@ -19,6 +19,10 @@ describe Brens::Words do
     specify { words.index(9).should == 1.0 }
     specify { words.index(5).should be_within(0.0001).of(0.5555) }
     specify { words.index(0).should == 0.0 }
+
+    specify { words.index("The").should == 0.0 }
+    specify { words.index("over").should == 0.3 }
+    specify { words.index("Hi.").should == 1.0 }
   end
 end
 
