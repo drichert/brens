@@ -1,6 +1,6 @@
 # Brens
 
-TODO: Write a gem description
+Brens is an [ANN](http://en.wikipedia.org/wiki/Artificial_neural_network "Artificial Neural Network")-based text generator
 
 ## Installation
 
@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Words
+
+```ruby
+text  = "The quick brown fox jumps over the lazy dog. Hi."
+words = Brens::Words.new(text)
+
+words[0.3] #=> "fox"
+```
+
+Convert position value to float index  
+
+```ruby
+words.index(9) #=> 1.0
+words.index(5) #=> 0.55555
+words.index(0) #=> 0.0
+```
 
 ## Contributing
 
