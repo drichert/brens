@@ -1,5 +1,5 @@
 require "brens/version"
-require "brens/text"
+require "brens/words"
 
 module Brens
 end
