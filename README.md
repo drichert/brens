@@ -21,11 +21,11 @@ Or install it yourself as:
 ```ruby
 gen = Brens::Generator.new
 
-# Add texts
+# Add source texts
 gen.add_text(File.read("text1.txt"))
 gen.add_text(File.read("text2.txt"))
 
-# Generate 300 words based on added texts
+# Generate 300 words based on added source texts
 gen.generate(300)
 ```
 
