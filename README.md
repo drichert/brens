@@ -18,33 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-### Words
-
-When indexed by float, returns word at position scaled by index
-
 ```ruby
-text  = "The quick brown fox jumps over the lazy dog. Hi."
-words = Brens::Words.new(text)
+gen = Brens::Generator.new
 
-words[0.0] #=> "The"
-words[0.3] #=> "fox"
-words[1.0] #=> "Hi."
-```
+# Add texts
+gen.add_text(File.read("text1.txt"))
+gen.add_text(File.read("text2.txt"))
 
-When indexed by integer, returns word at position
-
-```ruby 
-words[0] #=> "The"
-words[7] #=> "lazy"
-words[9] #=> "Hi."
-```
-
-Convert position value to float index  
-
-```ruby
-words.index(9) #=> 1.0
-words.index(5) #=> 0.55555
-words.index(0) #=> 0.0
+# Generate 300 words based on added texts
+gen.generate(300)
 ```
 
 ## Contributing
