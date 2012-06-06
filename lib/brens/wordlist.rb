@@ -4,6 +4,10 @@ module Brens
       super(words_arr.uniq)
     end
 
+    def <<(word)
+      super(word) unless index(word)
+    end
+
     # If passed a String, returns Float index
     #   of the String or nil if not found
     # If passed a Float, returns String closest
