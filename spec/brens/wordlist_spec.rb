@@ -19,12 +19,16 @@ module Brens
     its(["a"])     { should be_within(0.01).of(0.66) }
     its(["test."]) { should == 1.0 }
 
-    it "keeps list unique" do
+    it "keeps list unique when pushing" do
       expect { wlist << "is" }.not_to change { wlist }
     end
 
-    it "accepts words that aren't already in the list" do
+    it "allows unique words to be pushed" do
       expect { wlist << "peach" }.to change { wlist }
+    end
+
+    it "keeps list unique when concatenating" do
+      (wlist + %w{is magic}).should == %w{This is a test. magic}
     end
   end
 end

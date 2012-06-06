@@ -8,6 +8,11 @@ module Brens
       super(word) unless index(word)
     end
 
+    def +(words_arr)
+      # Don't add words that are already listed
+      super(words_arr - self)
+    end
+
     # If passed a String, returns Float index
     #   of the String or nil if not found
     # If passed a Float, returns String closest
