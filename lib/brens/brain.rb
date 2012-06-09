@@ -1,11 +1,13 @@
 module Brens
   class Brain
-    def initialize
-      @brain = ::RubyFann::Standard.new(
+    def initialize(params = {})
+      params = {
         :num_inputs     => 3,
         :hidden_neurons => [2, 8, 4, 3, 4],
         :num_outputs    => 1
-      )
+      }.merge(params)
+
+      @brain = ::RubyFann::Standard.new(params)
     end
 
     def train(inputs, outputs)
@@ -19,6 +21,10 @@ module Brens
 
     def run(*inputs)
       @brain.run(inputs)
+    end
+
+    def reset(params = {})
+      initialize(params)
     end
   end
 end
