@@ -1,3 +1,5 @@
+$:.unshift File.dirname(__FILE__)
+
 require "ruby_fann/neural_network"
 
 require "brens/version"
