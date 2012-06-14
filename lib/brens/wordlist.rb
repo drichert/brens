@@ -1,6 +1,6 @@
 module Brens
   class Wordlist < Array
-    def initialize(words_arr)
+    def initialize(words_arr = [])
       super(words_arr.uniq)
     end
 
