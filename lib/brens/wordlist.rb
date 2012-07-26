@@ -1,16 +1,19 @@
 module Brens
-  class Wordlist < Array
+  class Wordlist
+    attr_reader :words
+
     def initialize(words_arr = [])
-      super(words_arr.uniq)
+      @words = words_arr.uniq
     end
 
     def <<(word)
-      super(word) unless index(word)
+      word = word.to_s
+      @words << word unless words.index(word)
     end
 
+    # Don't add words that are already listed
     def +(words_arr)
-      # Don't add words that are already listed
-      super(words_arr - self)
+      @words | words_arr
     end
 
     # If passed a String, returns Float index
@@ -19,9 +22,9 @@ module Brens
     #   to index (first if < 0, last if > 1)
     def [](ndx)
       if ndx.is_a?(String)
-        index(ndx).to_f / (size - 1)
+        @words.index(ndx).to_f / (@words.size - 1)
       else
-        super((ndx.to_f * (size - 1)).round)
+        @words[(ndx.to_f * (@words.size - 1)).round]
       end
     end
   end

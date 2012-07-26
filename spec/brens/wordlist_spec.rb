@@ -7,7 +7,7 @@ module Brens
 
     subject { wlist }
 
-    it { should == %w{This is a test.} }
+    its(:words) { should == %w{This is a test.} }
 
     its([0])    { should == "This" }
     its([0.33]) { should == "is" }
@@ -20,11 +20,11 @@ module Brens
     its(["test."]) { should == 1.0 }
 
     it "keeps list unique when pushing" do
-      expect { wlist << "is" }.not_to change { wlist }
+      expect { wlist << "is" }.not_to change { wlist.words }
     end
 
     it "allows unique words to be pushed" do
-      expect { wlist << "peach" }.to change { wlist }
+      expect { wlist << "peach" }.to change { wlist.words }
     end
 
     it "keeps list unique when concatenating" do
