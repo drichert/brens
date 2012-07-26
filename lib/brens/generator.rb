@@ -20,7 +20,6 @@ module Brens
           @wlist ||= Wordlist.new
           @wlist += words
 
-          puts wlist.class
           inputs  = [] 
           outputs = []
 
@@ -29,9 +28,6 @@ module Brens
             # slice of words @phrase_length-long starting at index
             input = words[ndx..(ndx + (@phrase_length - 1))].map {|w| wlist[w] }
             inputs << input
-            #inputs << words[
-            #  ndx..(ndx + (@phrase_length - 1))
-            #] #.map {|w| @wlist[w] }
 
             # word following the slice
             output = @wlist[words[ndx + @phrase_length]]
