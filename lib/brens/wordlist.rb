@@ -4,16 +4,22 @@ module Brens
 
     def initialize(words_arr = [])
       @words = words_arr.uniq
+
+      self
     end
 
     def <<(word)
       word = word.to_s
       @words << word unless words.index(word)
+
+      self
     end
 
     # Don't add words that are already listed
     def +(words_arr)
       @words | words_arr
+
+      self
     end
 
     # If passed a String, returns Float index

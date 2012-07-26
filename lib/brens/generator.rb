@@ -1,6 +1,6 @@
 module Brens
   class Generator
-    attr_reader :texts
+    attr_reader :texts, :wlist
 
     def initialize(opts = {})
       opts = {
@@ -20,19 +20,25 @@ module Brens
           @wlist ||= Wordlist.new
           @wlist += words
 
-          i = [] # inputs
-          o = [] # outputs
+          puts wlist.class
+          inputs  = [] 
+          outputs = []
 
           # iterate through each word
-          words.each_with_index do |w, ndx|
+          words.each_index do |ndx|
             # slice of words @phrase_length-long starting at index
-            i << words[ndx..(ndx + (@phrase_length - 1))] #.map {|w| @wlist[w] }
+            input = words[ndx..(ndx + (@phrase_length - 1))].map {|w| wlist[w] }
+            inputs << input
+            #inputs << words[
+            #  ndx..(ndx + (@phrase_length - 1))
+            #] #.map {|w| @wlist[w] }
 
             # word following the slice
-            o << [@wlist[words[ndx + @phrase_length]]]
+            output = @wlist[words[ndx + @phrase_length]]
+            outputs << [output] unless output.nil?
           end
 
-          @brain.train(i, o)
+          @brain.train(inputs, outputs)
         end
       end
     end
