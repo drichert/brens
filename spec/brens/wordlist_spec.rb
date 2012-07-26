@@ -28,7 +28,7 @@ module Brens
     end
 
     it "keeps list unique when concatenating" do
-      (wlist + %w{is magic}).should == %w{This is a test. magic}
+      (wlist + %w{is magic}).words.should == %w{This is a test. magic}
     end
   end
 end

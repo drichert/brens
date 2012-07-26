@@ -17,7 +17,7 @@ module Brens
 
     # Don't add words that are already listed
     def +(words_arr)
-      @words | words_arr
+      @words = @words | words_arr
 
       self
     end
