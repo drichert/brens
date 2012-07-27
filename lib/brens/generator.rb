@@ -30,7 +30,8 @@ module Brens
             inputs << input
 
             # word following the slice
-            output = @wlist[words[ndx + @phrase_length]]
+            puts words[ndx + @phrase_length]
+            output = wlist[words[ndx + @phrase_length]]
             outputs << [output] unless output.nil?
           end
 

@@ -11,6 +11,9 @@ module Brens
     end
 
     def train(inputs, outputs)
+      #puts inputs.inspect
+      #puts outputs.inspect
+
       training_data = ::RubyFann::TrainData.new(
         :inputs          => inputs,
         :desired_outputs => outputs
