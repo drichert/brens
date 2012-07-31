@@ -1,5 +1,7 @@
 module Brens
-  class Brain
+  class Nn
+    attr_accessor :nn
+
     def initialize(params = {})
       params = {
         :num_inputs     => 3,
@@ -7,23 +9,20 @@ module Brens
         :num_outputs    => 1
       }.merge(params)
 
-      @brain = ::RubyFann::Standard.new(params)
+      nn = ::RubyFann::Standard.new(params)
     end
 
     def train(inputs, outputs)
-      #puts inputs.inspect
-      #puts outputs.inspect
-
       training_data = ::RubyFann::TrainData.new(
         :inputs          => inputs,
         :desired_outputs => outputs
       )
 
-      @brain.train_on_data(training_data, 1000, 1, 0.1)
+      nn.train_on_data(training_data, 1000, 1, 0.1)
     end
 
     def run(*inputs)
-      @brain.run(inputs)
+      nn.run(inputs)
     end
 
     def reset(params = {})

@@ -5,7 +5,7 @@ module Brens
     def initialize(opts = {})
       opts = { phrase_length: 3 }.merge(opts)
 
-      @brain         = Brain.new
+      @nn            = Nn.new
       @phrase_length = opts.delete(:phrase_length)
       @texts         = []
     end
@@ -33,7 +33,7 @@ module Brens
             outputs << [output] unless output.nil?
           end
 
-          @brain.train(inputs, outputs)
+          @nn.train(inputs, outputs)
         end
       end
     end
@@ -42,7 +42,7 @@ module Brens
       pl = @phrase_length
 
       (1..iters).inject(rand_phrase) {|text, n|
-        text + @brain.run(text[-pl..pl]).map {|ndx| words[ndx] }
+        text + @nn.run(text[-pl..pl]).map {|ndx| words[ndx] }
       }
     end
 
