@@ -1,11 +1,10 @@
 require "spec_helper"
 
 module Brens
-  describe Wordlist do
+  describe Words do
     let(:words) { %w{This is a This test. test.} }
-    let(:wlist) { Wordlist.new(words) }
 
-    subject { wlist }
+    subject { described_class.new(words) }
 
     its(:words) { should == %w{This is a test.} }
 
@@ -20,15 +19,15 @@ module Brens
     its(["test."]) { should == 1.0 }
 
     it "keeps list unique when pushing" do
-      expect { wlist << "is" }.not_to change { wlist.words }
+      expect { subject << "is" }.not_to change { subject.words }
     end
 
     it "allows unique words to be pushed" do
-      expect { wlist << "peach" }.to change { wlist.words }
+      expect { subject << "peach" }.to change { subject.words }
     end
 
     it "keeps list unique when concatenating" do
-      (wlist + %w{is magic}).words.should == %w{This is a test. magic}
+      (subject + %w{is magic}).words.should == %w{This is a test. magic}
     end
   end
 end

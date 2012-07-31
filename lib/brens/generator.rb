@@ -1,14 +1,12 @@
 module Brens
   class Generator
-    attr_reader :texts, :wlist
+    attr_reader :texts, :words
 
     def initialize(opts = {})
-      opts = {
-        :phrase_length => 3
-      }.merge(opts)
+      opts = { phrase_length: 3 }.merge(opts)
 
       @brain         = Brain.new
-      @phrase_length = opts[:phrase_length]
+      @phrase_length = opts.delete(:phrase_length)
       @texts         = []
     end
 
@@ -16,22 +14,22 @@ module Brens
       if !texts.index(str)
         @texts << str
 
-        texts.map {|t| whitespace_split(t) }.each do |words|
-          @wlist ||= Wordlist.new
-          @wlist += words
+        texts.map {|t| whitespace_split(t) }.each do |text|
+          @words ||= Words.new
+          @words += text
 
           inputs  = [] 
           outputs = []
 
-          # iterate through each word
-          words.each_index do |ndx|
+          text = usable_words(text)
+
+          text.each_index do |ndx|
             # slice of words @phrase_length-long starting at index
-            input = words[ndx..(ndx + (@phrase_length - 1))].map {|w| wlist[w] }
+            input = text[ndx..(ndx + (@phrase_length - 1))].map {|w| words[w] }
             inputs << input
 
             # word following the slice
-            puts words[ndx + @phrase_length]
-            output = wlist[words[ndx + @phrase_length]]
+            output = words[text[ndx + @phrase_length]]
             outputs << [output] unless output.nil?
           end
 
@@ -44,14 +42,8 @@ module Brens
       pl = @phrase_length
 
       (1..iters).inject(rand_phrase) {|text, n|
-        text + @brain.run(text[-pl..pl]).map {|ndx| @wlist[ndx] }
+        text + @brain.run(text[-pl..pl]).map {|ndx| words[ndx] }
       }
-
-      #text = rand_phrase
-
-      #iters.times do |n|
-      #  text += @brain.run(text[-@phrase_length..@phrase_length])
-      #end
     end
 
     private
@@ -67,6 +59,13 @@ module Brens
 
         start_ndx = (rand * (words.size - @phrase_length)).to_i
         words[start_ndx..(start_ndx + (@phrase_length - 1))]
+      end
+
+      def usable_words(text)
+        num_phrases = text.size / @phrase_length
+        end_ndx     = num_phrases * @phrase_length
+
+        text[0..end_ndx]
       end
   end
 end

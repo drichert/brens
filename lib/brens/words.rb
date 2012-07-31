@@ -1,11 +1,9 @@
 module Brens
-  class Wordlist
+  class Words
     attr_reader :words
 
     def initialize(words_arr = [])
       @words = words_arr.uniq
-
-      self
     end
 
     def <<(word)
