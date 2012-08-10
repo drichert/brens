@@ -10,7 +10,7 @@ module Brens
     end
 
     # Public: Convert to RubyFann training data.
-    # 
+    #
     # pl - Phrase length.
     #
     # Returns a Hash. Keys are inputs, values are outputs.

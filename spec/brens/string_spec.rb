@@ -22,7 +22,7 @@ module Brens
 
     describe "#to_training_data" do
       it "should raise if string length is too short" do
-        expect { 
+        expect {
           described_class.new("word").to_training_data
         }.to raise_error("Too short")
       end
