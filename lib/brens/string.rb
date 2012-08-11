@@ -19,18 +19,17 @@ module Brens
 
       {}.tap do |io|
         words.each_index do |ndx|
-          ins = words[ndx..(ndx + (pl - 1))]
-          out = words[ndx + pl]
+          ins  = words[ndx..(ndx + (pl - 1))].map {|w| self[w] }
+          outs = [words[ndx + pl]].compact.map {|w| self[w] }
 
-          if ins.size == pl && !out.nil?
-            io[ins] = [out]
+          if ins.size == pl && !outs.empty?
+            io[ins] = outs
           end
         end
       end
     end
 
-    # TODO -- spec/doc
-    def []
+    def [](ndx)
       if ndx.is_a?(String)
         words.index(ndx).to_f / (words.size - 1)
       else
