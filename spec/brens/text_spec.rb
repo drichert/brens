@@ -8,6 +8,18 @@ module Brens
 
     its(:to_a) { should == ["This", "is", "a", "test."] }
 
+    describe "attr methods" do
+      describe "readers" do
+        it { should respond_to(:words) }
+        it { should respond_to(:training_data) }
+      end
+
+      describe "accessors" do
+        it { should respond_to(:phrase_length) }
+        it { should respond_to(:phrase_length=) }
+      end
+    end
+
     describe "#to_a" do
       before { subject.to_a }
 

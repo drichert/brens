@@ -1,7 +1,14 @@
 module Brens
   class Text < ::String
-    attr_reader :words
-    attr_reader :training_data
+    attr_reader   :words
+    attr_reader   :training_data
+    attr_accessor :phrase_length
+
+    def initialize(str)
+      @phrase_length ||= 3
+
+      super
+    end
 
     # Public: Split on whitespace.
     #
@@ -15,7 +22,7 @@ module Brens
     # pl - Phrase length.
     #
     # Returns a Hash. Keys are inputs, values are outputs.
-    def to_training_data(pl = 3)
+    def to_training_data(pl = @phrase_length)
       raise "Too short" if to_a.size < pl + 1
 
       @training_data ||= {}.tap do |io|
