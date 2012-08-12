@@ -107,5 +107,16 @@ module Brens
         end
       end
     end
+
+    describe "#[]" do
+      its([0.0])    { should == "This" }
+      its([0.0001]) { should == "This" }
+      its([0.3])    { should == "is" }
+      its([1.0])    { should == "test." }
+
+      its(["This"])  { should == 0.0 }
+      its(["test."]) { should == 1.0 }
+      its(["a"])     { should be_within(0.001).of(0.666) }
+    end
   end
 end

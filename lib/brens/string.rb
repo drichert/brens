@@ -30,10 +30,10 @@ module Brens
     end
 
     def [](ndx)
-      if ndx.is_a?(String)
-        words.index(ndx).to_f / (words.size - 1)
+      if ndx.is_a?(Float)
+        to_a[(ndx.to_f * (to_a.size - 1)).round]
       else
-        words[(ndx.to_f * (words.size - 1)).round]
+        to_a.index(ndx.to_s).to_f / (to_a.size - 1)
       end
     end
   end
