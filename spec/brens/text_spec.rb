@@ -21,6 +21,15 @@ module Brens
     end
 
     describe "#to_training_data" do
+      it "memoizes on @training_data" do
+        subject.to_training_data
+        training_data = subject.instance_variable_get(:@training_data)
+        training_data.should be_a(Hash)
+
+        subject.words.should_not_receive(:each_index)
+        subject.to_training_data
+      end
+
       it "should raise if string length is too short" do
         expect {
           described_class.new("word").to_training_data

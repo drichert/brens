@@ -1,6 +1,7 @@
 module Brens
   class Text < ::String
     attr_reader :words
+    attr_reader :training_data
 
     # Public: Split on whitespace.
     #
@@ -17,7 +18,7 @@ module Brens
     def to_training_data(pl = 3)
       raise "Too short" if to_a.size < pl + 1
 
-      {}.tap do |io|
+      @training_data ||= {}.tap do |io|
         words.each_index do |ndx|
           ins  = words[ndx..(ndx + (pl - 1))].map {|w| self[w] }
           outs = [words[ndx + pl]].compact.map {|w| self[w] }
