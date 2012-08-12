@@ -48,5 +48,11 @@ module Brens
     def split_on_whitespace
       split(/\s+/)
     end
+
+    # TODO: spec/doc
+    def rand_phrase
+      start_ndx = (rand * (to_a.size - phrase_length + 1)).to_i
+      to_a[start_ndx..(start_ndx + (phrase_length - 1))]
+    end
   end
 end
