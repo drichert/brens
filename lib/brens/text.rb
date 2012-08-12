@@ -1,5 +1,5 @@
 module Brens
-  class String < ::String
+  class Text < ::String
     attr_reader :words
 
     # Public: Split on whitespace.

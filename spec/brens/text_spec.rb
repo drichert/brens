@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Brens
-  describe String do
+  describe Text do
     let(:str) { "This   is a\ntest.\t" }
 
     subject { described_class.new(str) }
