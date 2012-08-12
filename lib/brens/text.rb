@@ -7,7 +7,7 @@ module Brens
     #
     # Returns an Array.
     def to_a
-      @words ||= split(/\s+/)
+      @words ||= split_on_whitespace
     end
 
     # Public: Convert to RubyFann training data.
@@ -36,6 +36,10 @@ module Brens
       else
         to_a.index(ndx.to_s).to_f / (to_a.size - 1)
       end
+    end
+
+    def split_on_whitespace
+      split(/\s+/)
     end
   end
 end
