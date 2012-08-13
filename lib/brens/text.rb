@@ -5,7 +5,7 @@ module Brens
     attr_accessor :phrase_length
 
     def initialize(str)
-      @phrase_length ||= 3
+      @phrase_length = 3
 
       super
     end
@@ -38,10 +38,10 @@ module Brens
     end
 
     def [](ndx)
-      if ndx.is_a?(Float)
-        to_a[(ndx.to_f * (to_a.size - 1)).round]
+      if ndx.is_a?(String)
+        to_a.index(ndx)
       else
-        to_a.index(ndx.to_s).to_f / (to_a.size - 1)
+        to_a[ndx.to_i]
       end
     end
 

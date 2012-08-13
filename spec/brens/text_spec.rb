@@ -52,45 +52,19 @@ module Brens
         let(:training_data) { described_class.new(str).to_training_data(2) }
 
         describe "inputs (keys)" do
-          describe "@ 0" do
-            subject { training_data.keys[0] }
+          subject { training_data.keys }
 
-            its([0]) { should == 0.0 }
-            its([1]) { should be_within(0.001).of(0.333) }
-          end
-
-          describe "@ 1" do
-            subject { training_data.keys[1] }
-
-            its([0]) { should be_within(0.001).of(0.333) }
-            its([1]) { should be_within(0.001).of(0.666) }
-          end
-
-          describe "@ 2" do
-            subject { training_data.keys[2] }
-
-            it { should be_nil }
-          end
+          its([0]) { should == [0, 1] }
+          its([1]) { should == [1, 2] }
+          its([2]) { should be_nil }
         end
 
         describe "outputs (values)" do
-          describe "@ 0" do
-            subject { training_data.values[0] }
+          subject { training_data.values }
 
-            its([0]) { should be_within(0.001).of(0.666) }
-          end
-
-          describe "@ 1" do
-            subject { training_data.values[1] }
-
-            its([0]) { should == 1.0 }
-          end
-
-          describe "@ 2" do
-            subject { training_data.values[2] }
-
-            it { should be_nil }
-          end
+          its([0]) { should == [2] }
+          its([1]) { should == [3] }
+          its([2]) { should be_nil }
         end
       end
 
@@ -98,46 +72,30 @@ module Brens
         let(:training_data) { described_class.new(str).to_training_data(3) }
 
         describe "inputs (keys)" do
-          describe "@ 0" do
-            subject { training_data.keys[0] }
+          subject { training_data.keys }
 
-            its([0]) { should == 0.0 }
-            its([1]) { should be_within(0.001).of(0.333) }
-            its([2]) { should be_within(0.001).of(0.666) }
-          end
-
-          describe "@ 1" do
-            subject { training_data.keys[1] }
-
-            it { should be_nil }
-          end
+          its([0]) { should == [0, 1, 2] }
+          its([1]) { should be_nil }
         end
 
         describe "outputs (values)" do
-          describe "@ 0" do
-            subject { training_data.values[0] }
+          subject { training_data.values }
 
-            its([0]) { should == 1.0 }
-          end
-
-          describe "@ 1" do
-            subject { training_data.values[1] }
-
-            it { should be_nil }
-          end
+          its([0]) { should == [3] }
+          its([1]) { should be_nil }
         end
       end
     end
 
     describe "#[]" do
-      its([0.0])    { should == "This" }
-      its([0.0001]) { should == "This" }
-      its([0.3])    { should == "is" }
-      its([1.0])    { should == "test." }
+      its([0]) { should == "This" }
+      its([1]) { should == "is" }
+      its([2]) { should == "a" }
+      its([3]) { should == "test." }
 
-      its(["This"])  { should == 0.0 }
-      its(["test."]) { should == 1.0 }
-      its(["a"])     { should be_within(0.001).of(0.666) }
+      its(["This"])  { should == 0 }
+      its(["test."]) { should == 3 }
+      its(["a"])     { should == 2 }
     end
   end
 end
